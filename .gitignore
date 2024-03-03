@@ -63,3 +63,5 @@ coverage.out
 
 node_modules
 .npmrc
+
+.idea/
