@@ -17,6 +17,7 @@ package qianfan
 import (
 	"bufio"
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -163,7 +164,9 @@ type Requestor struct {
 // 创建一个 Requestor
 func newRequestor(options *Options) *Requestor {
 	r := &Requestor{
-		client:  &http.Client{},
+		client: &http.Client{
+			Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}},
+		},
 		Options: options,
 	}
 	if r.Options.LLMRetryTimeout != 0 {
